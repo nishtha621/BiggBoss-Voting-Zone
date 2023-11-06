@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BigBoss Voting Zone</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="Media/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Sigmar&display=swap"
+    rel="stylesheet">
+    <script src="https://kit.fontawesome.com/893a21e665.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">
+      <a href="home.html"><img src="Media\icon.png"></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="cont.html">Contestants</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <li id="loginLogout"><a href="signup.html">Log Out</a></li>
+  </nav>
+  <center>
+<h1>Who is your Favorite?</h1>
+  </center>
+  <div class="flex">
+    <div>
+      <label>
+        <input type="radio" id="vote1" name="option">
+        <img src="Media\Screenshot 2023-05-20 201844.png" class="contestantImage">
+      </label>
+      <br><br>
+      <div class="bar">
+        <div class="bar1"></div>
+      </div>
+    </div>
+
+    <div>
+      <label>
+        <input type="radio" id="vote2" name="option">
+        <img src="Media\Screenshot 2023-05-20 201811.png" class="contestantImage">
+      </label>
+      <br><br>
+      <div class="bar">
+        <div class="bar2"></div>
+      </div>
+    </div>
+
+    <div>
+      <label>
+        <input type="radio" id="vote3" name="option">
+        <img src="Media\Screenshot 2023-05-20 201857.png" class="contestantImage">
+      </label>
+      <br><br>
+      <div class="bar">
+        <div class="bar3"></div>
+      </div>
+    </div>
+
+    <div>
+      <label>
+        <input type="radio" id="vote4" name="option">
+        <img src="Media\Screenshot 2023-05-20 201822.png" class="contestantImage">
+      </label>
+      <br><br>
+      <div class="bar">
+        <div class="bar4"></div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <center>
+    <!--<input type="button" value="Vote" id="SubmitVote">-->
+    <button id="SubmitVote" onclick="vote()">Vote</button>
+  </center>
+  <footer class="footer">
+    <div class="cont">
+        <div class="row">
+            <div class="footer-col">
+                <h4>ColorsTv</h4>
+                <ul>
+                    <li><a href="about.html">about us</a></li>
+                    <li><a href="privacy.html">privacy policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>follow us</h4>
+                <div class="social-links">
+                    <a href=" https://www.facebook.com/ColorsTv.BiggBoss"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/justvoot "><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/colorstv/ "><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+<br>
+<p> Viacom18 Media Pvt. Ltd. is one of India’s fastest growing entertainment networks and
+a house of iconic brands that offers multi-platform, multi-generational and multicultural brand experiences.
+A joint venture of TV18, which owns 51%, and Viacom Inc., with a 49% stake, Viacom18 defines entertainment in India
+by touching the lives of people through its properties on air, online, on ground, in shop and through cinema.</p>
+</footer>
+</body>
+  <script>
+    //Selecting all the Inner Progress Bar
+    const bar1 = document.querySelector(".bar1");
+    const bar2 = document.querySelector(".bar2");
+    const bar3 = document.querySelector(".bar3");
+    const bar4 = document.querySelector(".bar4");
+
+    let a = parseInt(localStorage.getItem("c1"));
+    let b = parseInt(localStorage.getItem("c2"));
+    let c = parseInt(localStorage.getItem("c3"));
+    let d = parseInt(localStorage.getItem("c4"));
+    let total = a + b + c + d;
+
+    //Selecting Outer Progress Bar
+    const bar = document.querySelectorAll(".bar");
+
+    //Selecting all the Radio buttons
+    const vote1 = document.querySelector("#vote1");
+    const vote2 = document.querySelector("#vote2");
+    const vote3 = document.querySelector("#vote3");
+    const vote4 = document.querySelector("#vote4");
+
+    //Selecting the Vote Button
+    const btn = document.querySelector("#SubmitVote");
+
+    update();
+
+    function update() {
+      console.log(a, b, c, d);
+      console.log(total);
+      bar1.style.width = `${(a / total) * 100}%`;
+      bar2.style.width = `${(b / total) * 100}%`;
+      bar3.style.width = `${(c / total) * 100}%`;
+      bar4.style.width = `${(d / total) * 100}%`;
+
+      bar1.textContent = parseInt(`${(a / total) * 100}`) + "%";
+      bar2.textContent = parseInt(`${(b / total) * 100}`) + "%";
+      bar3.textContent = parseInt(`${(c / total) * 100}`) + "%";
+      bar4.textContent = parseInt(`${(d / total) * 100}`) + "%";
+    }
+
+    function vote() {
+      //Checking the state of Individual Radio Buttons
+      if (vote1.checked) {
+        a++;
+        localStorage.setItem("c1", a);
+        console.log("a");
+      } else if (vote2.checked) {
+        b++;
+        localStorage.setItem("c2", b);
+        console.log("b");
+      } else if (vote3.checked) {
+        c++;
+        localStorage.setItem("c3", c);
+        console.log("c");
+      } else if (vote4.checked) {
+        d++;
+        localStorage.setItem("c4", d);
+        console.log("d");
+      } else {
+        total--;
+      }
+      total++;
+      update();
+      btn.style.display = "none";
+      for (let i = 0; i < bar.length; i++) {
+        bar[i].style.display = "block";
+      }
+    }
+
+    function reset() {
+      var a = 0;
+      localStorage.setItem("c1", a);
+      localStorage.setItem("c2", a);
+      localStorage.setItem("c3", a);
+      localStorage.setItem("c4", a);
+    }
+
+  </script>
+
+</html>

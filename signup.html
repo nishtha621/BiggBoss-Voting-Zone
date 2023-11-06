@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup Page</title>
+  <style>
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+   body{
+    font-family:'poppins',sans-serif;
+    font-size:20px;
+    background: url(https://cdn.thenewstack.io/media/2020/02/9254e5e8-background-1430099_1280.png);
+    background-size:cover;
+   }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 25px;
+      border: 4px solid #100404;
+      background-color:rgba(246, 249, 251, 0.842);
+      border-radius: 4px;
+      position: auto;
+    }
+
+    .container h2 {
+      text-align: center;
+    }
+    .container input[type="text"],
+    .container input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #150606;
+      box-sizing: border-box;
+      border-radius: 4px;
+      font-size: 19px;
+    }
+    .container button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      font-size: 17px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Signup</h2>
+    <form id="signupForm">
+      <input type="text" placeholder="First Name" id="firstname" name="name" required>
+      <input type="text" placeholder="Last Name" id="lastname" name="lastname" required>
+      <input type="text" placeholder="Enter E-mail" id="email" name="email" required>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Sign up</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the values entered by the user
+      var firstname = document.getElementById('firstname').value;
+      var lastname = document.getElementById('lastname').value;
+      var email = document.getElementById('email').value;
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+     
+
+      // Retrieve the existing user array from local storage
+      var users = JSON.parse(localStorage.getItem('users')) || [];
+
+      // Check if the entered username already exists in the array
+      var isUsernameTaken = users.some(function(user) {
+        return user.username === username;
+      });
+      var isemailTaken = users.some(function(user) {
+        return user.email=== email;
+      });
+      var isfisrtnameTaken = users.some(function(user) {
+        return user.firstname === firstname;
+      });
+      var islastnameTaken = users.some(function(user) {
+        return user.lastname === lastname;
+      });
+
+      if (isUsernameTaken || isemailTaken||islastnameTaken ||isfisrtnameTaken ) {
+        alert('User already exists. Please choose a different accont.');
+        // Clear the form fields
+        document.getElementById('firstname').value = '';
+        document.getElementById('lastname').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+      } 
+      else {
+        // Create an object to store the username and password
+        var user = {
+          firstname:firstname,
+          lastname:lastname,
+          email:email,
+          username: username,
+          password: password,
+          voted:false
+        };
+
+        // Append the new user to the array
+        users.push(user);
+
+        // Store the updated array in local storage
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // Clear the form fields
+        document.getElementById('firstname').value = '';
+        document.getElementById('lastname').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+
+        alert('Signup successful!');
+        window.location.href="./login.html"
+        // Redirect to another page or perform any additional actions
+      }
+    });
+  </script>
+</body>
+</html>
